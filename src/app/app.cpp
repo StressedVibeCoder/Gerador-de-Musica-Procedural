@@ -87,41 +87,119 @@ Composition App::generateComposition() const {
               << "5. Personalizada\n";
 
     int d = askInt("Escolha: ", 1, 5);
+
     switch (d) {
-        case 1: settings.durationSeconds = 30; break;
-        case 2: settings.durationSeconds = 60; break;
-        case 3: settings.durationSeconds = 120; break;
-        case 4: settings.durationSeconds = 300; break;
-        case 5: settings.durationSeconds =
-            askDouble("Segundos (1-1800): ", 1, 1800); break;
+        case 1:
+            settings.durationSeconds = 30;
+            break;
+
+        case 2:
+            settings.durationSeconds = 60;
+            break;
+
+        case 3:
+            settings.durationSeconds = 120;
+            break;
+
+        case 4:
+            settings.durationSeconds = 300;
+            break;
+
+        case 5:
+            settings.durationSeconds =
+                askDouble("Segundos (1-1800): ", 1, 1800);
+            break;
     }
 
     std::cout << "\nBPM:\n"
-              << "1. 80\n2. 100\n3. 120\n4. 140\n5. Personalizado\n";
+              << "1. 80\n"
+              << "2. 100\n"
+              << "3. 120\n"
+              << "4. 140\n"
+              << "5. Personalizado\n";
 
     int b = askInt("Escolha: ", 1, 5);
+
     switch (b) {
-        case 1: settings.bpm = 80; break;
-        case 2: settings.bpm = 100; break;
-        case 3: settings.bpm = 120; break;
-        case 4: settings.bpm = 140; break;
-        case 5: settings.bpm = askInt("BPM (40-240): ", 40, 240); break;
+        case 1:
+            settings.bpm = 80;
+            break;
+
+        case 2:
+            settings.bpm = 100;
+            break;
+
+        case 3:
+            settings.bpm = 120;
+            break;
+
+        case 4:
+            settings.bpm = 140;
+            break;
+
+        case 5:
+            settings.bpm =
+                askInt("BPM (40-240): ", 40, 240);
+            break;
     }
 
     std::cout << "\nTonalidade:\n"
-              << "1. C\n2. C#\n3. D\n4. D#\n5. E\n6. F\n"
-              << "7. F#\n8. G\n9. G#\n10. A\n11. A#\n12. B\n";
+              << "1. C\n"
+              << "2. C#\n"
+              << "3. D\n"
+              << "4. D#\n"
+              << "5. E\n"
+              << "6. F\n"
+              << "7. F#\n"
+              << "8. G\n"
+              << "9. G#\n"
+              << "10. A\n"
+              << "11. A#\n"
+              << "12. B\n";
 
     int key = askInt("Escolha: ", 1, 12);
+
     settings.root = 60 + (key - 1);
 
     Scale scale = makeScale(settings.root);
 
-    auto chords = ChordProgressionGenerator::generate(scale, settings);
-    auto melody = MelodyGenerator::generate(scale, settings);
-    auto bass = BassGenerator::generate(chords);
+    const double beatsPerSecond =
+        settings.bpm / 60.0;
+
+    const double totalBeats =
+        settings.durationSeconds * beatsPerSecond;
+
+    const int chordCount =
+        std::max(
+            1,
+            static_cast<int>(totalBeats / 2.0)
+        );
+
+    std::cout << "\n[DEBUG] Beats totais: "
+              << totalBeats << "\n";
+
+    std::cout << "[DEBUG] Acordes a gerar: "
+              << chordCount << "\n";
+
+    auto chords =
+        ChordProgressionGenerator::generate(
+            scale,
+            chordCount
+        );
+
+    auto melody =
+        MelodyGenerator::generate(
+            scale,
+            settings
+        );
+
+    auto bass =
+        BassGenerator::generate(
+            chords
+        );
 
     Composition composition;
+
     composition.settings = settings;
     composition.chords = std::move(chords);
     composition.melody = std::move(melody);
