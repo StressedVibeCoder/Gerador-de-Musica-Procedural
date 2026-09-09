@@ -448,7 +448,29 @@ Consulte as respectivas licenças dentro de:
 libs/
 ```
 
-A licença do próprio projeto está disponível em `LICENSE`.
+---
+## 📜 Licença do Projeto
+
+Copyright (c) 2026 StressedVibeCoder
+
+É concedida, gratuitamente, a qualquer pessoa que obtenha uma cópia
+deste software e dos respetivos ficheiros de documentação, a permissão para
+utilizar, copiar, modificar, fundir, publicar, distribuir, sublicenciar e/ou
+vender cópias do software, bem como permitir que outras pessoas a quem o
+software seja fornecido façam o mesmo, desde que sejam respeitadas as
+seguintes condições:
+
+O aviso de copyright acima e este aviso de permissão devem ser incluídos em
+todas as cópias ou partes substanciais do software.
+
+Este software é fornecido "tal como está", sem qualquer garantia, expressa
+ou implícita, incluindo, entre outras, garantias de comercialização,
+adequação a uma finalidade específica e não violação. Em nenhuma
+circunstância os autores ou detentores dos direitos de autor serão
+responsáveis por quaisquer reclamações, danos ou outras responsabilidades,
+seja numa ação contratual, extracontratual ou de outra natureza, decorrentes
+de, resultantes de ou relacionadas com o software ou com a sua utilização.
+
 
 ---
 
